@@ -16,3 +16,5 @@ See the Mulan PSL v2 for more details.
 ![coc](http://github.zhangqx.com/file-checker/github/hu-qi/30-days-of-react-native?path=CODE_OF_CONDUCT.md)
 
 30 days of React Native(v0.63) examples/demos.
+
+> 如果您有幸看到这个项目，恭喜您，“从入门到放弃”，某招聘网站上React Native相关的岗位不到100个，全国哦！所以，放弃吧！哈哈！
