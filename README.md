@@ -10,13 +10,9 @@ See the Mulan PSL v2 for more details.
 
 # 30 Days of React Native
 
-![license](http://github.zhangqx.com/file-checker/github/hu-qi/30-days-of-react-native
-?path=LICENSE)
-![readme](http://github.zhangqx.com/file-checker/github/hu-qi/30-days-of-react-native
-?path=README.md)
-![contributing](http://github.zhangqx.com/file-checker/github/hu-qi/30-days-of-react-native
-?path=CONTRIBUTING.md)
-![coc](http://github.zhangqx.com/file-checker/github/hu-qi/30-days-of-react-native
-?path=CODE_OF_CONDUCT.md)
+![license](http://github.zhangqx.com/file-checker/github/hu-qi/30-days-of-react-native?path=LICENSE)
+![readme](http://github.zhangqx.com/file-checker/github/hu-qi/30-days-of-react-native?path=README.md)
+![contributing](http://github.zhangqx.com/file-checker/github/hu-qi/30-days-of-react-native?path=CONTRIBUTING.md)
+![coc](http://github.zhangqx.com/file-checker/github/hu-qi/30-days-of-react-native?path=CODE_OF_CONDUCT.md)
 
 30 days of React Native(v0.63) examples/demos.
