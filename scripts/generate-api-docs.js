@@ -85,6 +85,6 @@ if (process.env.NODE_ENV === 'test') {
 function cleanComponentResult(component) {
   return {
     ...component,
-    methods: component.methods.filter(method => !method.name.startsWith('_')),
+    methods: component.methods.filter((method) => !method.name.startsWith('_')),
   };
 }

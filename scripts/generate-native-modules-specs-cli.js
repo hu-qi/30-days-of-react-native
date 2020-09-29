@@ -60,7 +60,7 @@ function generateSpec(
 
   if (platform === 'ios') {
     const fileNames = [`${moduleSpecName}.h`, `${moduleSpecName}-generated.mm`];
-    fileNames.forEach(fileName => {
+    fileNames.forEach((fileName) => {
       const newOutput = `${tempOutputDirectory}/${fileName}`;
       const prevOutput = `${outputDirectory}/${fileName}`;
       fs.copyFileSync(newOutput, prevOutput);
@@ -76,8 +76,8 @@ function generateSpec(
     )}`;
     mkdirp.sync(javaOutputDirectory);
     files
-      .filter(f => f.endsWith('.java'))
-      .forEach(f => {
+      .filter((f) => f.endsWith('.java'))
+      .forEach((f) => {
         fs.copyFileSync(
           `${tempOutputDirectory}/${f}`,
           `${javaOutputDirectory}/${f}`,
@@ -89,12 +89,12 @@ function generateSpec(
     mkdirp.sync(jniOutputDirectory);
     files
       .filter(
-        f =>
+        (f) =>
           f === 'Android.mk' ||
           (f.startsWith(moduleSpecName) &&
             (f.endsWith('.h') || f.endsWith('.cpp'))),
       )
-      .forEach(f => {
+      .forEach((f) => {
         fs.copyFileSync(
           `${tempOutputDirectory}/${f}`,
           `${jniOutputDirectory}/${f}`,

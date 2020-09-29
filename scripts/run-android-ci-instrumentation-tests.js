@@ -36,20 +36,20 @@ const ignoredTests = [
 
 // ReactAndroid/src/androidTest/java/com/facebook/react/tests/ReactHorizontalScrollViewTestCase.java
 const testClasses = ls(`${argv.path}/*.java`)
-  .map(javaFile => {
+  .map((javaFile) => {
     // ReactHorizontalScrollViewTestCase
     return path.basename(javaFile, '.java');
   })
-  .filter(className => {
+  .filter((className) => {
     return ignoredTests.indexOf(className) === -1;
   })
-  .map(className => {
+  .map((className) => {
     // com.facebook.react.tests.ReactHorizontalScrollViewTestCase
     return argv.package + '.' + className;
   });
 
 let exitCode = 0;
-testClasses.forEach(testClass => {
+testClasses.forEach((testClass) => {
   if (
     tryExecNTimes(() => {
       echo(`Starting ${testClass}`);
