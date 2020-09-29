@@ -96,6 +96,7 @@ describe('Android Test App', function () {
         },
         (err) => {
           // ignoring if Reload JS button can't be located
+          console.log(err);
         },
       );
   });
