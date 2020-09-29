@@ -1,4 +1,4 @@
-ignore]
+[ignore]
 ; We fork some components by platform
 .*/*[.]ios.js
 
