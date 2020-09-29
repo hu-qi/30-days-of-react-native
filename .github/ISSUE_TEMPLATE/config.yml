@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
-    - name: 📅 30-days-of-react-native
-      url: https://github.com/hu-qi/30-days-of-react-native/issues
-      about: 欢迎尽情沟通！
+  - name: 📅 30-days-of-react-native
+    url: https://github.com/hu-qi/30-days-of-react-native/issues
+    about: 欢迎尽情沟通！

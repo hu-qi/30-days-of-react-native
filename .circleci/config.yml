@@ -15,11 +15,10 @@ defaults: &defaults
   environment:
     - GIT_COMMIT_DESC: git log --format=oneline -n 1 $CIRCLE_SHA1
     # The public github tokens are publicly visible by design
-    - PUBLIC_PULLBOT_GITHUB_TOKEN_A: "be5efa9787e608857cda"
-    - PUBLIC_PULLBOT_GITHUB_TOKEN_B: "1d7ca6246b867ea942d7"
-    - PUBLIC_ANALYSISBOT_GITHUB_TOKEN_A: &github_token_a "be5efa9787e608857cda"
-    - PUBLIC_ANALYSISBOT_GITHUB_TOKEN_B: &github_token_b "1d7ca6246b867ea942d7"
-
+    - PUBLIC_PULLBOT_GITHUB_TOKEN_A: 'be5efa9787e608857cda'
+    - PUBLIC_PULLBOT_GITHUB_TOKEN_B: '1d7ca6246b867ea942d7'
+    - PUBLIC_ANALYSISBOT_GITHUB_TOKEN_A: &github_token_a 'be5efa9787e608857cda'
+    - PUBLIC_ANALYSISBOT_GITHUB_TOKEN_B: &github_token_b '1d7ca6246b867ea942d7'
 
 # -------------------------
 #        EXECUTORS
@@ -37,11 +36,11 @@ executors:
     <<: *defaults
     docker:
       - image: reactnativecommunity/react-native-android:2019-10-18
-    resource_class: "large"
+    resource_class: 'large'
     environment:
-      - TERM: "dumb"
+      - TERM: 'dumb'
       - ADB_INSTALL_TIMEOUT: 10
-      - _JAVA_OPTIONS: "-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
+      - _JAVA_OPTIONS: '-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap'
       - GRADLE_OPTS: '-Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-XX:+HeapDumpOnOutOfMemoryError"'
       - BUILD_THREADS: 2
       # Repeated here, as the environment key in this executor will overwrite the one in defaults
@@ -50,7 +49,7 @@ executors:
   reactnativeios:
     <<: *defaults
     macos:
-      xcode: &_XCODE_VERSION "11.6.0"
+      xcode: &_XCODE_VERSION '11.6.0'
 
 # -------------------------
 #        COMMANDS
@@ -78,7 +77,7 @@ commands:
             - v4-yarn-cache-{{ arch }}-{{ checksum "yarn.lock" }}
             - v4-yarn-cache-{{ arch }}
       - run:
-          name: "Yarn: Install Dependencies"
+          name: 'Yarn: Install Dependencies'
           command: |
             # Skip yarn install on metro bump commits as the package is not yet
             # available on npm
@@ -113,7 +112,7 @@ commands:
   install_github_bot_deps:
     steps:
       - run:
-          name: "Yarn: Install dependencies (GitHub bots)"
+          name: 'Yarn: Install dependencies (GitHub bots)'
           command: cd bots && yarn install --non-interactive --cache-folder ~/.cache/yarn
 
   brew_install:
@@ -123,7 +122,7 @@ commands:
         type: string
     steps:
       - run:
-          name: "Brew: Install << parameters.package >>"
+          name: 'Brew: Install << parameters.package >>'
           command: HOMEBREW_NO_AUTO_UPDATE=1 brew install << parameters.package >> >/dev/null
 
   with_brew_cache_span:
@@ -187,15 +186,15 @@ commands:
       platform:
         description: Target platform
         type: enum
-        enum: ["android", "ios", "js"]
-        default: "js"
+        enum: ['android', 'ios', 'js']
+        default: 'js'
       retries:
         description: How many times the job should try to run these tests
         type: integer
         default: 3
     steps:
       - run:
-          name: "Run Tests: << parameters.platform >> End-to-End Tests"
+          name: 'Run Tests: << parameters.platform >> End-to-End Tests'
           command: node ./scripts/run-ci-e2e-tests.js --<< parameters.platform >> --retries << parameters.retries >>
 
   report_bundle_size:
@@ -203,7 +202,7 @@ commands:
       platform:
         description: Target platform
         type: enum
-        enum: ["android", "ios"]
+        enum: ['android', 'ios']
     steps:
       - install_github_bot_deps
       - run:
@@ -216,12 +215,12 @@ commands:
 jobs:
   setup:
     parameters:
-        executor:
-          type: executor
-          default: nodelts
-        checkout_type:
-          type: string
-          default: node
+      executor:
+        type: executor
+        default: nodelts
+      checkout_type:
+        type: string
+        default: node
     executor: << parameters.executor >>
     steps:
       - checkout
@@ -260,7 +259,6 @@ jobs:
             cd bots
             DANGER_GITHUB_API_TOKEN="$PUBLIC_PULLBOT_GITHUB_TOKEN_A""$PUBLIC_PULLBOT_GITHUB_TOKEN_B" yarn danger ci --use-github-checks
           when: always
-
 
   # -------------------------
   #    JOBS: Analyze Code
@@ -327,7 +325,7 @@ jobs:
       # -------------------------
       # Run JavaScript tests
       - run:
-          name: "Run Tests: JavaScript Tests"
+          name: 'Run Tests: JavaScript Tests'
           command: node ./scripts/run-ci-javascript-tests.js --maxWorkers 2
       - run_e2e:
           platform: js
@@ -364,7 +362,7 @@ jobs:
         type: boolean
         default: false
     environment:
-      - REPORTS_DIR: "./reports/junit"
+      - REPORTS_DIR: './reports/junit'
     steps:
       - restore_cache_checkout:
           checkout_type: ios
@@ -391,7 +389,7 @@ jobs:
             - brew_install:
                 package: node@10
             - run:
-                name: "Brew: Tap wix/brew"
+                name: 'Brew: Tap wix/brew'
                 command: HOMEBREW_NO_AUTO_UPDATE=1 brew tap wix/brew >/dev/null
             - brew_install:
                 package: applesimutils
@@ -431,14 +429,14 @@ jobs:
           condition: << parameters.run_unit_tests >>
           steps:
             - run:
-                name: "Run Tests: iOS Unit and Integration Tests"
+                name: 'Run Tests: iOS Unit and Integration Tests'
                 command: yarn test-ios
       # Runs iOS Detox e2e tests
       - when:
           condition: << parameters.run_detox_tests >>
           steps:
             - run:
-                name: "Run Tests: Detox iOS End-to-End Tests"
+                name: 'Run Tests: Detox iOS End-to-End Tests'
                 command: yarn run build-ios-e2e && yarn run test-ios-e2e
 
       # Optionally, run disabled tests
@@ -447,7 +445,7 @@ jobs:
           steps:
             - run: echo "Failing tests may be moved here temporarily."
             - run:
-                name: "Run Tests: CocoaPods"
+                name: 'Run Tests: CocoaPods'
                 command: ./scripts/process-podspecs.sh
             - run:
                 name: Free up port 8081 for iOS End-to-End Tests
@@ -540,10 +538,10 @@ jobs:
       # -------------------------
       # Run Android tests
       - run:
-          name: "Run Tests: Android Unit Tests"
+          name: 'Run Tests: Android Unit Tests'
           command: buck test ReactAndroid/src/test/... --config build.threads=$BUILD_THREADS --xml ./reports/buck/all-results-raw.xml
       - run:
-          name: "Run Tests: Android Instrumentation Tests"
+          name: 'Run Tests: Android Instrumentation Tests'
           command: |
             if [[ ! -e ReactAndroid/src/androidTest/assets/AndroidTestBundle.js ]]; then
               echo "JavaScript bundle missing, cannot run instrumentation tests. Verify Build JavaScript Bundle step completed successfully."; exit 1;
@@ -627,7 +625,7 @@ jobs:
             - v1-win-yarn-cache-{{ arch }}-{{ checksum "yarn.lock" }}
             - v1-win-yarn-cache-{{ arch }}-
       - run:
-          name: "Yarn: Install Dependencies"
+          name: 'Yarn: Install Dependencies'
           command: yarn install --frozen-lockfile --non-interactive
       - save_cache:
           key: v1-win-yarn-cache-{{ arch }}-{{ checksum "yarn.lock" }}
@@ -652,13 +650,13 @@ jobs:
       # -------------------------
       # Run Tests
       - run:
-          name: "Flow: Check Android"
+          name: 'Flow: Check Android'
           command: yarn flow-check-android
       - run:
-          name: "Flow: Check iOS"
+          name: 'Flow: Check iOS'
           command: yarn flow-check-ios
       - run:
-          name: "Run Tests: JavaScript Tests"
+          name: 'Run Tests: JavaScript Tests'
           command: yarn test
 
       # Optionally, run disabled tests
@@ -863,7 +861,7 @@ workflows:
   nightly:
     triggers:
       - schedule:
-          cron: "0 0 * * *"
+          cron: '0 0 * * *'
           filters:
             branches:
               only:
