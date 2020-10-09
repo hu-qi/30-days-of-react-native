@@ -1,6 +1,6 @@
 [ignore]
 ; We fork some components by platform
-.*/*[.]android.js
+.*/*[.]ios.js
 
 ; Ignore templates for 'react-native init'
 <PROJECT_ROOT>/template/.*
@@ -36,7 +36,7 @@ exact_by_default=true
 
 module.file_ext=.js
 module.file_ext=.json
-module.file_ext=.ios.js
+module.file_ext=.android.js
 
 munge_underscores=true
 

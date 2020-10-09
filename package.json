@@ -7,7 +7,16 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "test-ci": "jest --maxWorkers=2 --ci --reporters=\"default\" --reporters=\"jest-junit\"",
+    "flow": "flow",
+    "flow-check-ios": "flow check",
+    "flow-check-android": "flow check --flowconfig-name .flowconfig.android",
+    "lint": "eslint .",
+    "lint:fix": "eslint --ext .js ./src ./scripts --fix",
+    "clang-format": "clang-format -i --glob=*/**/*.{h,cpp,m,mm}",
+    "format": "npm run prettier && npm run clang-format",
+    "prettier": "prettier --write \"./**/*.{js,md,yml}\"",
+    "format-check": "prettier --check \"./**/*.{js,md,yml}\""
   },
   "dependencies": {
     "react": "16.13.1",
@@ -19,8 +28,12 @@
     "@react-native-community/eslint-config": "^2.0.0",
     "babel-jest": "^26.3.0",
     "eslint": "^7.9.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "flow-bin": "^0.134.0",
     "jest": "^26.4.2",
     "metro-react-native-babel-preset": "^0.63.0",
+    "prettier": "^2.1.2",
     "react-test-renderer": "16.13.1"
   },
   "jest": {
